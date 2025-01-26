@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block content %}
+  <h2>Settings</h2>
+  <p>Logged in as: {{ user.username }}</p>
+  <div class="settings-options">
+    <a href="{{ url_for('auth_bp.change_password') }}" class="settings-link">Change Password</a>
+    <form method="POST" action="{{ url_for('auth_bp.logout') }}" style="display:inline;">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+      <button type="submit" class="settings-link">Logout</button>
+    </form>
+  </div>
+{% endblock %}

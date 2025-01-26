@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2>Set Up 2FA</h2>
+<p>Scan the QR code below using Google Authenticator or manually enter the secret:</p>
+<img src="data:image/png;base64,{{ qr_code }}" alt="QR Code">
+<p><strong>TOTP Secret:</strong> {{ totp_secret }}</p>
+<form method="POST" action="{{ url_for('auth_bp.twofa_setup') }}">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+  <label>Enter 6-digit TOTP from Google Authenticator:</label>
+  <input type="text" name="token" required>
+  <button type="submit">Verify</button>
+</form>
+{% endblock %}

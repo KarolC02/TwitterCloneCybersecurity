@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block content %}
+  <h2>Search Results for "{{ query }}"</h2>
+  
+  {% if results %}
+    <ul class="search-results">
+      {% for user in results %}
+        <li>
+          <a href="{{ url_for('main_bp.profile', username=user.username) }}">{{ user.username }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No users found matching your query.</p>
+  {% endif %}
+{% endblock %}

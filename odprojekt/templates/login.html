@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2>Login</h2>
+<form method="POST" action="{{ url_for('auth_bp.login') }}">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+
+  <!-- Honeypot field: hidden from normal users -->
+  <input type="text" name="honeypot_field" id="honeypot_field" style="display:none;" />
+
+  <label>Username or Email</label>
+  <input type="text" name="username_or_email" required>
+
+  <label>Password</label>
+  <input type="password" name="password" required>
+
+  <button type="submit">Login</button>
+
+  <!-- Forgot Password link (optional) -->
+  <p style="margin-top: 10px;">
+    <a href="{{ url_for('auth_bp.forgot_password') }}">Forgot Password?</a>
+  </p>
+</form>
+{% endblock %}

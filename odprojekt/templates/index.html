@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block content %}
+  <h2>Message Wall</h2>
+
+  <form method="POST" action="{{ url_for('message_bp.post_message') }}" id="post-message-form">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+    <label for="message-content">Message Content (Markdown Allowed)</label>
+    <textarea id="message-content" name="content" rows="3" required></textarea>
+    <p>
+      <strong>Tips:</strong> Enter raw Markdown directly. For example:
+      <code>**bold**</code>, <code>*italic*</code>, 
+      or embed images: <code>![alt](http://example.com/img.jpg)</code>
+    </p>
+    <button type="submit">Post</button>
+  </form>
+
+  <div id="message-wall">
+    {% for message in messages %}
+      <div class="message">
+        <a href="{{ url_for('main_bp.profile', username=message.user.username) }}" class="username">
+          {{ message.user.username }}
+        </a>
+        <span class="timestamp">({{ message.timestamp.strftime('%Y-%m-%d %H:%M') }})</span>
+        <div>{{ message.content|safe_markdown }}</div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

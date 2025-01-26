@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Twitter Clone</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-left">
+      <a href="{{ url_for('main_bp.index') }}" class="logo">Twitter Clone</a>
+    </div>
+    <div class="navbar-right">
+      {% if 'user_id' in session %}
+        <span class="username">Welcome, {{ user.username }}</span>
+        <div class="dropdown">
+          <button class="dropbtn">Settings</button>
+          <div class="dropdown-content">
+            <a href="{{ url_for('auth_bp.change_password') }}">Change Password</a>
+            <a href="{{ url_for('auth_bp.logout') }}">Logout</a>
+          </div>
+        </div>
+      {% else %}
+        <a href="{{ url_for('auth_bp.login') }}" class="nav-link">Login</a>
+        <a href="{{ url_for('auth_bp.register') }}" class="nav-link">Register</a>
+      {% endif %}
+    </div>
+  </nav>
+
+  {# Optionally show a search bar if user is logged in and not on certain routes #}
+  {% if 'user_id' in session and not (request.endpoint == 'auth_bp.change_password' or request.endpoint == 'auth_bp.forgot_password') %}
+  <div class="top-bar">
+    <form method="GET" action="{{ url_for('main_bp.search_users') }}" class="search-bar">
+      <input type="text" name="q" placeholder="Search users..." required>
+      <button type="submit">Search</button>
+    </form>
+  </div>
+  {% endif %}
+
+  <div class="main-content-wrapper">
+    {# Show side-bar with popular users if user is logged in and popular_users is not empty #}
+    {% if 'user_id' in session and popular_users and popular_users|length > 0 %}
+    <aside class="side-bar">
+      <h4>Popular Users</h4>
+      <ul class="popular-users-list">
+        {% for puser in popular_users %}
+          <li>
+            <a href="{{ url_for('main_bp.profile', username=puser.username) }}">{{ puser.username }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </aside>
+    {% endif %}
+
+    <div class="container">
+      {# Flash messages #}
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="flash {{ category }}">{{ message }}</div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+      {# Main page content #}
+      {% block content %}{% endblock %}
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</body>
+</html>

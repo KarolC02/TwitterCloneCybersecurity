@@ -1,0 +1,55 @@
+version: "3.8"
+
+services:
+  redis:
+    image: redis:latest
+    container_name: "odprojekt_redis"
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - ./redis_data:/data
+    networks:
+      - odnetwork
+
+  app:
+    build: .
+    container_name: "odprojekt_app"
+    # Mount local code if you want live updates in dev mode. Remove for strict prod.
+    volumes:
+      - .:/app
+    depends_on:
+      - redis
+    environment:
+      # Basic environment variables for the Flask app
+      FLASK_ENV: "production"
+
+      # Database
+      SQLALCHEMY_DATABASE_URI: "sqlite:///odprojekt.db"
+
+      # Core secrets/credentials (fallbacks if not set in .env or host env)
+      SECRET_KEY: "${SECRET_KEY:-fallback-secret}"
+      MAIL_SERVER: "${MAIL_SERVER:-smtp.gmail.com}"
+      MAIL_PORT: "${MAIL_PORT:-587}"
+      MAIL_USE_TLS: "${MAIL_USE_TLS:-True}"
+      MAIL_USERNAME: "${MAIL_USERNAME:-}"
+      MAIL_PASSWORD: "${MAIL_PASSWORD:-}"
+
+    networks:
+      - odnetwork
+
+  nginx:
+    image: nginx:latest
+    container_name: "odprojekt_nginx"
+    # Map your custom nginx.conf and SSL certs into the container
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./certs:/etc/nginx/certs:ro
+    depends_on:
+      - app
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - odnetwork
+
+networks:
+  odnetwork:

@@ -1,0 +1,539 @@
+/* -------------------------------------------------------------
+   BASE STYLES
+   ------------------------------------------------------------- */
+
+   html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f5f8fa;
+    color: #14171a;
+    line-height: 1.5;
+  }
+  
+  .container {
+    flex: 1; 
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .main-content-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    margin: 20px; 
+  }
+  
+  /* -------------------------------------------------------------
+     NAVBAR
+     ------------------------------------------------------------- */
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .navbar-left .logo {
+    font-size: 24px;
+    font-weight: 700;
+    color: #3b82f6;
+    text-decoration: none;
+  }
+  
+  .navbar-right {
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbar-right .username {
+    margin-right: 20px;
+    font-weight: 500;
+    color: #333;
+  }
+  
+  .navbar-right .nav-link {
+    margin-left: 15px;
+    text-decoration: none;
+    color: #3b82f6;
+    font-weight: 500;
+    transition: color 0.2s ease-in-out;
+  }
+  
+  .navbar-right .nav-link:hover {
+    color: #2563eb;
+  }
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropbtn {
+    background-color: #3b82f6;
+    color: #fff;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+  }
+  
+  .dropbtn:hover {
+    background-color: #2563eb;
+    transform: scale(1.02);
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    min-width: 160px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    border-radius: 4px;
+    overflow: hidden;
+    padding: 8px 0;
+  }
+  
+  .dropdown-content a {
+    color: #14171a;
+    padding: 10px 16px;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.15s ease-in-out;
+  }
+  
+  .dropdown-content a:hover {
+    background-color: #f5f8fa;
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  /* -------------------------------------------------------------
+     FLASH MESSAGES
+     ------------------------------------------------------------- */
+  
+  .flash {
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    font-weight: 500;
+  }
+  
+  .flash.error {
+    background-color: #ffebee;
+    color: #c62828;
+  }
+  
+  .flash.info {
+    background-color: #e3f2fd;
+    color: #1565c0;
+  }
+  
+  /* -------------------------------------------------------------
+     TOP BAR (Search Only)
+     ------------------------------------------------------------- */
+  
+  .top-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #e1e8ed;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+  }
+  
+  .search-bar {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .search-bar input {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #e1e8ed;
+    border-radius: 20px;
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+  
+  .search-bar input:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 4px rgba(59, 130, 246, 0.3);
+  }
+  
+  .search-bar button {
+    background-color: #3b82f6;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+  }
+  
+  .search-bar button:hover {
+    background-color: #2563eb;
+    transform: scale(1.05);
+  }
+  
+  /* -------------------------------------------------------------
+     SIDE BAR (Popular Users)
+     ------------------------------------------------------------- */
+  
+  .side-bar {
+    width: 200px;
+    margin-right: 20px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .side-bar h4 {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    font-weight: 700;
+    color: #14171a;
+  }
+  
+  .popular-users-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .popular-users-list li {
+    margin-bottom: 10px;
+  }
+  
+  .popular-users-list a {
+    text-decoration: none;
+    color: #3b82f6;
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+  
+  .popular-users-list a:hover {
+    color: #2563eb;
+    text-decoration: underline;
+  }
+  
+  /* -------------------------------------------------------------
+     MESSAGE WALL & MESSAGES
+     ------------------------------------------------------------- */
+  
+  .message {
+    padding: 15px;
+    border-bottom: 1px solid #e1e8ed;
+  }
+  
+  .message:last-child {
+    border-bottom: none;
+  }
+  
+  .message .username {
+    font-weight: 700;
+    color: #3b82f6;
+    margin-right: 6px;
+    text-decoration: none;
+  }
+  
+  .message .username:hover {
+    text-decoration: underline;
+    color: #2563eb;
+  }
+  
+  .message .timestamp {
+    font-size: 12px;
+    color: #657786;
+  }
+  
+  .load-more {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .load-more button {
+    background-color: #3b82f6;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+  }
+  
+  .load-more button:hover {
+    background-color: #2563eb;
+    transform: scale(1.02);
+  }
+  
+  /* -------------------------------------------------------------
+     POST MESSAGE FORM
+     ------------------------------------------------------------- */
+  
+  #post-message-form {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  #post-message-form label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #333;
+  }
+  
+  #post-message-form textarea {
+    display: block;
+    width: 100%;
+    min-height: 80px;
+    border: 1px solid #e1e8ed;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    resize: vertical;
+    transition: border-color 0.2s ease-in-out;
+  }
+  
+  #post-message-form textarea:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 4px rgba(59, 130, 246, 0.3);
+  }
+  
+  #post-message-form p {
+    font-size: 14px;
+    color: #657786;
+    margin-bottom: 10px;
+  }
+  
+  #post-message-form button {
+    background-color: #3b82f6;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s, transform 0.2s;
+  }
+  
+  #post-message-form button:hover {
+    background-color: #2563eb;
+    transform: scale(1.02);
+  }
+  
+  /* -------------------------------------------------------------
+     BACK BUTTON & SETTINGS LINK
+     ------------------------------------------------------------- */
+  
+  .back-button {
+    display: inline-block;
+    margin-bottom: 20px;
+    text-decoration: none;
+    color: #3b82f6;
+    font-weight: bold;
+    transition: color 0.2s ease-in-out;
+  }
+  
+  .back-button:hover {
+    color: #2563eb;
+  }
+  
+  .settings-link {
+    display: block;
+    padding: 10px;
+    color: #3b82f6;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
+  }
+  
+  .settings-link:hover {
+    background-color: #f5f8fa;
+    color: #2563eb;
+  }
+  
+  button.settings-link {
+    background: none;
+    border: none;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    padding: 0;
+    text-align: left;
+  }
+  
+  /* -------------------------------------------------------------
+     FORMS: LOGIN, REGISTER, PASSWORD CHANGE, ETC.
+     ------------------------------------------------------------- */
+  
+  form label {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  form input[type="text"],
+  form input[type="password"],
+  form input[type="email"] {
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    padding: 8px 12px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #e1e8ed;
+    margin-bottom: 10px;
+    transition: border-color 0.2s ease-in-out;
+  }
+  
+  form input[type="text"]:focus,
+  form input[type="password"]:focus,
+  form input[type="email"]:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 3px rgba(59, 130, 246, 0.3);
+  }
+  
+  form button {
+    background-color: #3b82f6;
+    color: #fff;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s, transform 0.2s;
+  }
+  
+  form button:hover {
+    background-color: #2563eb;
+    transform: scale(1.02);
+  }
+  
+  /* -------------------------------------------------------------
+     SEARCH RESULTS
+     ------------------------------------------------------------- */
+  
+  .search-results h2 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #14171a;
+  }
+  
+  .search-results {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+  }
+  
+  .search-results li {
+    margin-bottom: 15px;
+    padding: 15px;
+    background-color: #ffffff;
+    border: 1px solid #e1e8ed;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .search-results li:hover {
+    background-color: #f5f8fa;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .search-results li a {
+    text-decoration: none;
+    color: #3b82f6;
+    font-weight: bold;
+    font-size: 16px;
+  }
+  
+  .search-results li a:hover {
+    text-decoration: underline;
+    color: #2563eb;
+  }
+  
+  .search-results ul {
+    padding: 0;
+    margin: 0;
+  }
+  
+  .search-results ul li {
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #f5f8fa;
+    border: 1px solid #e1e8ed;
+    border-radius: 8px;
+    transition: background-color 0.2s, transform 0.2s;
+  }
+  
+  .search-results ul li:hover {
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+  }
+  
+  .search-results ul li a {
+    color: #3b82f6;
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: none;
+  }
+  
+  .search-results ul li a:hover {
+    text-decoration: underline;
+    color: #2563eb;
+  }
+  
+  /* -------------------------------------------------------------
+     2FA SETUP / VERIFY
+     ------------------------------------------------------------- */
+  
+  img[alt="QR Code"] {
+    margin: 20px 0;
+    display: block;
+  }
+
+
+  /* -------------------------------------------------------------
+   FORGOT PASSWORD / RESET PASSWORD FORMS
+   ------------------------------------------------------------- */
+
+.forgot-password-form,
+.reset-password-form {
+  max-width: 400px;  
+  margin: 0 auto;  
+}
+
+.forgot-password-form h2,
+.reset-password-form h2 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #14171a;
+}
